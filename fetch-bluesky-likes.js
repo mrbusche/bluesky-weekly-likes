@@ -171,12 +171,7 @@ const formatLikesForEmail = (likes) => {
     }
 
     html += `<p><a href="https://bsky.app/profile/${author.handle}/post/${post.uri.split('/').pop()}" target="_blank" style="color: #007acc;">View on Blue Sky</a></p>`;
-    text += `\n--- Post #${index + 1} ---\n`;
-    text += `Author: ${author.displayName || author.handle} (@${author.handle})\n`;
-    text += `Posted: ${likedAt}\n`;
-    text += `Text: ${record.text || 'No text content'}\n`;
     text += `View on Blue Sky: https://bsky.app/profile/${author.handle}/post/${post.uri.split('/').pop()}\n`;
-    text += '\n';
 
     html += '</div>';
     text += '\n';
