@@ -1,4 +1,4 @@
-name: Weekly Blue Sky Likes Email
+name: Weekly Bluesky Likes Email
 
 on:
   pull_request:
@@ -33,5 +33,5 @@ jobs:
         run: |
           yarn install --immutable
 
-      - name: Fetch and send Blue Sky likes
+      - name: Fetch and send Bluesky likes
         run: npm run fetch-likes

@@ -18,7 +18,7 @@ oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 const usDateFormatter = new Intl.DateTimeFormat('en-US');
 
 const sendEmail = async () => {
-  console.log('Starting Blue Sky likes email process...');
+  console.log('Starting Bluesky likes email process...');
 
   await authenticate();
   const likes = await fetchWeeklyLikes();
@@ -35,7 +35,7 @@ const sendEmail = async () => {
   const mailOptions = {
     from: senderEmail,
     to: recipientEmails,
-    subject: `Weekly Blue Sky Likes from ${usDateFormatter.format(oneWeekAgo)}`,
+    subject: `Weekly Bluesky Likes from ${usDateFormatter.format(oneWeekAgo)}`,
     html: formattedLikes.html,
     text: formattedLikes.text,
   };
@@ -54,7 +54,7 @@ const authenticate = async () => {
       identifier: blueskyIdentifier,
       password: blueskyPassword,
     });
-    console.log('Successfully authenticated with Blue Sky');
+    console.log('Successfully authenticated with Bluesky');
   } catch (error) {
     console.error('Authentication failed:', error);
     throw error;
@@ -109,12 +109,12 @@ const formatLikesForEmail = (likes) => {
   }
 
   let html = `
-    <h1>Your Blue Sky Likes - Past Week</h1>
+    <h1>Your Bluesky Likes - Past Week</h1>
     <p>You liked ${likes.length} posts this week!</p>
     <hr>
   `;
 
-  let text = `Your Blue Sky Likes - Past Week\n\nYou liked ${likes.length} posts this week!\n\n`;
+  let text = `Your Bluesky Likes - Past Week\n\nYou liked ${likes.length} posts this week!\n\n`;
 
   likes.forEach((like, index) => {
     const post = like.post;
@@ -183,8 +183,8 @@ const formatLikesForEmail = (likes) => {
       }
     }
 
-    html += `<p><a href="https://bsky.app/profile/${author.handle}/post/${post.uri.split('/').pop()}" target="_blank" style="color: #007acc;">View on Blue Sky</a></p>`;
-    text += `View on Blue Sky: https://bsky.app/profile/${author.handle}/post/${post.uri.split('/').pop()}\n`;
+    html += `<p><a href="https://bsky.app/profile/${author.handle}/post/${post.uri.split('/').pop()}" target="_blank" style="color: #007acc;">View on Bluesky</a></p>`;
+    text += `View on Bluesky: https://bsky.app/profile/${author.handle}/post/${post.uri.split('/').pop()}\n`;
 
     html += '</div>';
     text += '\n';
