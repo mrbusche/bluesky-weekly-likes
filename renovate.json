@@ -1,0 +1,16 @@
+{
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "enabled": true
+    },
+    {
+      "matchManagers": ["nvm"],
+      "matchPaths": [".nvmrc"],
+      "enabled": true
+    }
+  ],
+  "assignees": ["@mrbusche"],
+  "ignoreUnstable": false
+}
