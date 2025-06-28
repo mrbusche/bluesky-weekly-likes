@@ -130,7 +130,7 @@ const formatLikesForEmail = (likes) => {
         <p><strong>Posted:</strong> ${likedAt}</p>
         <p><strong>Text:</strong></p>
         <blockquote style="background: #f5f5f5; padding: 10px; border-left: 4px solid #007acc;">
-          ${record.text || 'No text content'}
+          ${record.text.replace(/\n/g, '<br/>') || 'No text content'}
         </blockquote>
     `;
 
@@ -138,7 +138,20 @@ const formatLikesForEmail = (likes) => {
     text += `\n--- Post #${index + 1} ---\n`;
     text += `Author: ${author.displayName || author.handle} (@${author.handle})\n`;
     text += `Posted: ${likedAt}\n`;
-    text += `Text: ${record.text || 'No text content'}\n`;
+    text += `Text: ${record.text.replace(/\n/g, '<br/>') || 'No text content'}\n`;
+
+    if (post.record.facets) {
+      post.record.facets.forEach((facet) => {
+        if (facet.features) {
+          facet.features.forEach((feature) => {
+            if (feature.$type === 'app.bsky.richtext.facet#link' && feature.uri) {
+              html += `<p><strong>Link:</strong> <a href="${feature.uri}" target="_blank">${feature.uri}</a></p>`;
+              text += `Link: ${feature.uri}\n`;
+            }
+          });
+        }
+      });
+    }
 
     // Handle embedded content
     if (post.embed) {
