@@ -23,12 +23,11 @@ Go to your forked repository → Settings → Secrets and variables → Actions
 
 Add these repository secrets:
 
+- `EMAIL_USER`: your gmail address
+- `EMAIL_PASS`: your gmail app password
+- `RECIPIENT_EMAILS`: the email address to send to
 - `BLUESKY_IDENTIFIER`: Your Blue Sky handle (e.g., yourname.bsky.social)
 - `BLUESKY_PASSWORD`: Your Blue Sky password
-- `EMAIL_USER`: Your Gmail address
-- `EMAIL_PASS`: Your Gmail app password
-- `EMAIL_TO`: The email address to send the weekly digest to
-- `EMAIL_FROM`: The email address to send from (usually same as EMAIL_USER)
 
 ### 5. Enable GitHub Actions
 - Go to the Actions tab in your repository
@@ -41,10 +40,11 @@ Add these repository secrets:
 
 ## How it works
 
+- **Authentication**: Logs into Blue Sky using credentials from environment variables.
 - **Schedule**: Runs every Sunday at 9:00 AM UTC
-- **Data**: Fetches all your likes from the past 7 days
+- **Data**: Fetches all your likes from the past 7 days, with a safety limit of 500 likes.
 - **Content**: Includes post text, author info, images, videos, and links
-- **Email**: Sends a formatted HTML email with all the content
+- **Email**: Sends a formatted HTML and plain text email with all the content using Gmail's SMTP server
 
 ## Customization
 
@@ -54,12 +54,12 @@ You can modify the schedule by editing `.github/workflows/weekly-bluesky-likes.y
 schedule:
   # Run daily at 8 AM UTC
   - cron: '0 8 * * *'
-  
+
   # Run twice a week (Wednesday and Sunday at 9 AM UTC)
   - cron: '0 9 * * 0,3'
 ```
 
-You can also modify the email formatting by editing `scripts/fetch-bluesky-likes.js`.
+You can also modify the email formatting by editing `fetch-bluesky-likes.js`. The script formats likes into HTML and plain text, including post text, author info, images, videos, and links.
 
 ## Security Notes
 
