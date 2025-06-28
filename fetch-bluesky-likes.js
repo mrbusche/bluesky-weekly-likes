@@ -134,14 +134,21 @@ const formatLikesForEmail = (likes) => {
         </blockquote>
     `;
 
+    // Text version
+    text += `\n--- Post #${index + 1} ---\n`;
+    text += `Author: ${author.displayName || author.handle} (@${author.handle})\n`;
+    text += `Posted: ${likedAt}\n`;
+    text += `Text: ${record.text || 'No text content'}\n`;
+
     // Handle embedded content
     if (post.embed) {
       if (post.embed.images && post.embed.images.length > 0) {
         html += '<p><strong>Images:</strong></p><div style="display: flex; flex-wrap: wrap;">';
+        text += 'Images:\n';
 
         post.embed.images.forEach((image, imgIndex) => {
-          console.log('image', image);
           html += `<div style="margin: 5px;"><img src="${image.fullsize}" alt="${image.alt || ''}" style="max-width: ${image.aspectRatio.width}px; max-height: ${image.aspectRatio.height}px;" /></div>`;
+          text += `- Image ${imgIndex + 1}: ${image.fullsize}${image.alt ? ` (Alt: ${image.alt})` : ''}\n`;
         });
 
         html += '</div>';
@@ -149,13 +156,16 @@ const formatLikesForEmail = (likes) => {
 
       if (post.embed.video) {
         html += `<p><strong>Video:</strong> <a href="${post.embed.video.playlist}" target="_blank">Watch Video</a></p>`;
+        text += `Video: ${post.embed.video.playlist}\n`;
       }
 
       if (post.embed.external) {
         const external = post.embed.external;
         html += `<p><strong>Link:</strong> <a href="${external.uri}" target="_blank">${external.title}</a></p>`;
+        text += `Link: ${external.title} - ${external.uri}\n`;
         if (external.description) {
           html += `<p><em>${external.description}</em></p>`;
+          text += `Description: ${external.description}\n`;
         }
       }
     }
@@ -169,6 +179,7 @@ const formatLikesForEmail = (likes) => {
     text += '\n';
 
     html += '</div>';
+    text += '\n';
   });
 
   return { html, text };
