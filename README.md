@@ -2,17 +2,18 @@
 
 This project automatically sends you a weekly email containing all your Blue Sky likes from the past week, including text content and links to any images or videos.
 
+For accessibility purposes there is an HTML and text version of the generated email .
+
 ## Setup Instructions
 
 ### 1. Fork this repository to your GitHub account
 
 ### 2. Set up Blue Sky credentials
 - You'll need your Blue Sky username/handle and password
-- Note: You may want to create an app-specific password if Blue Sky supports it
+- Note: You will want to create an app-specific password for Blue Sky
 
 ### 3. Set up email credentials
 For Gmail (recommended):
-- Enable 2-factor authentication on your Google account
 - Generate an app-specific password:
   1. Go to Google Account settings
   2. Security → 2-Step Verification → App passwords
@@ -27,13 +28,9 @@ Add these repository secrets:
 - `EMAIL_PASS`: your gmail app password
 - `RECIPIENT_EMAILS`: the email address to send to
 - `BLUESKY_IDENTIFIER`: Your Blue Sky handle (e.g., yourname.bsky.social)
-- `BLUESKY_PASSWORD`: Your Blue Sky password
+- `BLUESKY_PASSWORD`: Your Blue Sky password from step 2
 
-### 5. Enable GitHub Actions
-- Go to the Actions tab in your repository
-- Enable workflows if they're not already enabled
-
-### 6. Test the workflow
+### 5. Test the workflow
 - Go to Actions → Weekly Blue Sky Likes Email
 - Click "Run workflow" to test it manually
 - Check your email for the weekly digest
@@ -41,44 +38,10 @@ Add these repository secrets:
 ## How it works
 
 - **Authentication**: Logs into Blue Sky using credentials from environment variables.
-- **Schedule**: Runs every Sunday at 9:00 AM UTC
+- **Schedule**: Runs every Monday at 2:00 AM UTC (8 or 9 pm in Central timezone)
 - **Data**: Fetches all your likes from the past 7 days, with a safety limit of 500 likes.
 - **Content**: Includes post text, author info, images, videos, and links
 - **Email**: Sends a formatted HTML and plain text email with all the content using Gmail's SMTP server
-
-## Customization
-
-You can modify the schedule by editing `.github/workflows/weekly-bluesky-likes.yml`:
-
-```yaml
-schedule:
-  # Run daily at 8 AM UTC
-  - cron: '0 8 * * *'
-
-  # Run twice a week (Wednesday and Sunday at 9 AM UTC)
-  - cron: '0 9 * * 0,3'
-```
-
-You can also modify the email formatting by editing `fetch-bluesky-likes.js`. The script formats likes into HTML and plain text, including post text, author info, images, videos, and links.
-
-## Security Notes
-
-- Never commit your credentials to the repository
-- Use GitHub Secrets for all sensitive information
-- Consider using app-specific passwords where available
-- The script only reads your likes; it doesn't post or modify anything
-
-## Troubleshooting
-
-### Common issues:
-
-1. **Authentication failed**: Check your Blue Sky credentials
-2. **Email not sending**: Verify your Gmail app password and settings
-3. **No likes found**: The script looks for likes in the past 7 days
-4. **Workflow not running**: Check that GitHub Actions are enabled
-
-### View logs:
-- Go to Actions tab → Select the workflow run → View job details
 
 ## Privacy
 
