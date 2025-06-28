@@ -1,4 +1,4 @@
-const { BskyAgent } = require('@atproto/api');
+const { AtpAgent } = require('@atproto/api');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
@@ -9,7 +9,7 @@ const recipientEmails = process.env.RECIPIENT_EMAILS;
 const blueskyIdentifier = process.env.BLUESKY_IDENTIFIER;
 const blueskyPassword = process.env.BLUESKY_PASSWORD;
 
-const agent = new BskyAgent({
+const agent = new AtpAgent({
   service: 'https://bsky.social',
 });
 
