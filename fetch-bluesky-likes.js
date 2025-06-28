@@ -13,13 +13,16 @@ const agent = new BskyAgent({
   service: 'https://bsky.social',
 });
 
+const oneWeekAgo = new Date();
+oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+const usDateFormatter = new Intl.DateTimeFormat('en-US');
+
 const sendEmail = async () => {
   console.log('Starting Blue Sky likes email process...');
 
   await authenticate();
   const likes = await fetchWeeklyLikes();
   const formattedLikes = formatLikesForEmail(likes);
-  console.log(formattedLikes);
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -32,7 +35,7 @@ const sendEmail = async () => {
   const mailOptions = {
     from: senderEmail,
     to: recipientEmails,
-    subject: 'Weekly Blue Sky Likes',
+    subject: `Weekly Blue Sky Likes from ${usDateFormatter.format(oneWeekAgo)}`,
     html: formattedLikes.html,
     text: formattedLikes.text,
   };
@@ -60,8 +63,6 @@ const authenticate = async () => {
 
 const fetchWeeklyLikes = async () => {
   try {
-    const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     const likes = [];
     let cursor;
 
@@ -114,7 +115,6 @@ const formatLikesForEmail = (likes) => {
   `;
 
   let text = `Your Blue Sky Likes - Past Week\n\nYou liked ${likes.length} posts this week!\n\n`;
-  const usDateFormatter = new Intl.DateTimeFormat('en-US');
 
   likes.forEach((like, index) => {
     const post = like.post;
@@ -143,15 +143,15 @@ const formatLikesForEmail = (likes) => {
     // Handle embedded content
     if (post.embed) {
       if (post.embed.images && post.embed.images.length > 0) {
-        html += '<p><strong>Images:</strong></p><ul>';
+        html += '<p><strong>Images:</strong></p><div style="display: flex; flex-wrap: wrap;">';
         text += 'Images:\n';
 
         post.embed.images.forEach((image, imgIndex) => {
-          html += `<li><a href="${image.fullsize}" target="_blank">Image ${imgIndex + 1}</a>${image.alt ? ` - ${image.alt}` : ''}</li>`;
+          html += `<div style="margin: 5px;"><img src="${image.fullsize}" alt="${image.alt || ''}" style="max-width: ${image.aspectRatio.width}px; max-height: ${image.aspectRatio.height}px;" /></div>`;
           text += `- Image ${imgIndex + 1}: ${image.fullsize}${image.alt ? ` (Alt: ${image.alt})` : ''}\n`;
         });
 
-        html += '</ul>';
+        html += '</div>';
       }
 
       if (post.embed.video) {
