@@ -181,6 +181,12 @@ const formatLikesForEmail = (likes) => {
           text += `Description: ${external.description}\n`;
         }
       }
+
+      const quotedPostText = post.embed.record?.value?.text;
+      if (quotedPostText) {
+        html += `<p><strong>Quoted Post Text:</strong></p><blockquote style="background: #f5f5f5; padding: 10px; border-left: 4px solid #007acc;">${quotedPostText.replace(/\n/g, '<br/>')}</blockquote>`;
+        text += `Text: ${quotedPostText.replace(/\n/g, '<br/>')}\n`;
+      }
     }
 
     html += `<p><a href="https://bsky.app/profile/${author.handle}/post/${post.uri.split('/').pop()}" target="_blank" style="color: #007acc;">View on Bluesky</a></p>`;
