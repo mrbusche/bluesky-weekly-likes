@@ -1,7 +1,7 @@
 const { AtpAgent } = require('@atproto/api');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
-const https = require('node:https'); // Import the built-in https module
+const https = require('node:https');
 
 const senderEmail = process.env.EMAIL_USER;
 const emailPassword = process.env.EMAIL_PASS;
@@ -189,10 +189,10 @@ const formatLikesForEmail = async (likes) => {
             const cid = `image_${index}_${imgIndex}`; // Unique Content ID for each image
             html += `<div style="margin: 5px;"><img src="cid:${cid}" alt="${image.alt || ''}" style="max-width: ${image.aspectRatio ? image.aspectRatio.width : 200}px; max-height: ${image.aspectRatio ? image.aspectRatio.height : 200}px;" /></div>`;
             attachments.push({
-              filename: `image_${index}_${imgIndex}.jpg`, // Or use a better filename
+              filename: `image_${index}_${imgIndex}.jpg`,
               content: base64Image.split(',')[1], // Get only the base64 data
               encoding: 'base64',
-              cid: cid, // Content ID
+              cid: cid,
             });
             text += `- Image ${imgIndex + 1}: ${image.fullsize}${image.alt ? ` (Alt: ${image.alt})` : ''}\n`;
           } catch (error) {
