@@ -1,7 +1,7 @@
 {
   "name": "bluesky-weekly-likes",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.2.0",
+  "description": "Sends an email with your Bluesky likes for the past week",
   "license": "ISC",
   "author": "https://github.com/mrbusche",
   "scripts": {

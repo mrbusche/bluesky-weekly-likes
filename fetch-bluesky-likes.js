@@ -1,6 +1,7 @@
 const { AtpAgent } = require('@atproto/api');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
+const https = require('node:https');
 
 const senderEmail = process.env.EMAIL_USER;
 const emailPassword = process.env.EMAIL_PASS;
@@ -22,7 +23,7 @@ const sendEmail = async () => {
 
   await authenticate();
   const likes = await fetchWeeklyLikes();
-  const formattedLikes = formatLikesForEmail(likes);
+  const formattedLikes = await formatLikesForEmail(likes);
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -38,6 +39,7 @@ const sendEmail = async () => {
     subject: `Weekly Bluesky Likes from ${usDateFormatter.format(oneWeekAgo)}`,
     html: formattedLikes.html,
     text: formattedLikes.text,
+    attachments: formattedLikes.attachments,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -100,7 +102,28 @@ const fetchWeeklyLikes = async () => {
   }
 };
 
-const formatLikesForEmail = (likes) => {
+const getImageBase64 = (url) => {
+  return new Promise((resolve, reject) => {
+    https
+      .get(url, (response) => {
+        if (response.statusCode < 200 || response.statusCode > 299) {
+          return reject(new Error(`Failed to load page, status code: ${response.statusCode}`));
+        }
+        const body = [];
+        response.on('data', (chunk) => body.push(chunk));
+        response.on('end', () => {
+          const buffer = Buffer.concat(body);
+          const mimeType = response.headers['content-type'] || 'image/jpeg'; // Default to jpeg if not found
+          resolve(`data:${mimeType};base64,${buffer.toString('base64')}`);
+        });
+      })
+      .on('error', (e) => {
+        reject(e);
+      });
+  });
+};
+
+const formatLikesForEmail = async (likes) => {
   if (likes.length === 0) {
     return {
       html: '<p>No likes found for the past week.</p>',
@@ -115,8 +138,9 @@ const formatLikesForEmail = (likes) => {
   `;
 
   let text = `Your Bluesky Likes - Past Week\n\nYou liked ${likes.length} posts this week!\n\n`;
+  const attachments = [];
 
-  likes.forEach((like, index) => {
+  for (const [index, like] of likes.entries()) {
     const post = like.post;
     const author = post.author;
     const record = post.record;
@@ -159,10 +183,24 @@ const formatLikesForEmail = (likes) => {
         html += '<p><strong>Images:</strong></p><div style="display: flex; flex-wrap: wrap;">';
         text += 'Images:\n';
 
-        post.embed.images.forEach((image, imgIndex) => {
-          html += `<div style="margin: 5px;"><img src="${image.fullsize}" alt="${image.alt || ''}" style="max-width: ${image.aspectRatio.width}px; max-height: ${image.aspectRatio.height}px;" /></div>`;
-          text += `- Image ${imgIndex + 1}: ${image.fullsize}${image.alt ? ` (Alt: ${image.alt})` : ''}\n`;
-        });
+        for (const [imgIndex, image] of post.embed.images.entries()) {
+          try {
+            const base64Image = await getImageBase64(image.fullsize);
+            const cid = `image_${index}_${imgIndex}`; // Unique Content ID for each image
+            html += `<div style="margin: 5px;"><img src="cid:${cid}" alt="${image.alt || ''}" style="max-width: ${image.aspectRatio ? image.aspectRatio.width : 200}px; max-height: ${image.aspectRatio ? image.aspectRatio.height : 200}px;" /></div>`;
+            attachments.push({
+              filename: `image_${index}_${imgIndex}.jpg`,
+              content: base64Image.split(',')[1], // Get only the base64 data
+              encoding: 'base64',
+              cid: cid,
+            });
+            text += `- Image ${imgIndex + 1}: ${image.fullsize}${image.alt ? ` (Alt: ${image.alt})` : ''}\n`;
+          } catch (error) {
+            console.error(`Error fetching image ${image.fullsize}:`, error);
+            html += `<p style="color: red;">Could not load image: ${image.fullsize}</p>`;
+            text += `- Image ${imgIndex + 1}: Could not load image from ${image.fullsize}\n`;
+          }
+        }
 
         html += '</div>';
       }
@@ -194,9 +232,9 @@ const formatLikesForEmail = (likes) => {
 
     html += '</div>';
     text += '\n';
-  });
+  }
 
-  return { html, text };
+  return { html, text, attachments };
 };
 
 sendEmail();
