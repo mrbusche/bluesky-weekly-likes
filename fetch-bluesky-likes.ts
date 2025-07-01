@@ -1,14 +1,13 @@
-const { AtpAgent } = require('@atproto/api');
-require('dotenv').config();
-const nodemailer = require('nodemailer');
-const https = require('node:https');
+import 'https://deno.land/std@0.208.0/dotenv/load.ts';
+import { AtpAgent } from '@atproto/api';
+import nodemailer from 'nodemailer';
 
-const senderEmail = process.env.EMAIL_USER;
-const emailPassword = process.env.EMAIL_PASS;
-const recipientEmails = process.env.RECIPIENT_EMAILS;
+const senderEmail = Deno.env.get('EMAIL_USER');
+const emailPassword = Deno.env.get('EMAIL_PASS');
+const recipientEmails = Deno.env.get('RECIPIENT_EMAILS');
 
-const blueskyIdentifier = process.env.BLUESKY_IDENTIFIER;
-const blueskyPassword = process.env.BLUESKY_PASSWORD;
+const blueskyIdentifier = Deno.env.get('BLUESKY_IDENTIFIER');
+const blueskyPassword = Deno.env.get('BLUESKY_PASSWORD');
 
 const agent = new AtpAgent({
   service: 'https://bsky.social',
@@ -65,10 +64,14 @@ const authenticate = async () => {
 
 const fetchWeeklyLikes = async () => {
   try {
-    const likes = [];
-    let cursor;
+    const likes: any[] = [];
+    let cursor: string | undefined;
 
     console.log(`Fetching likes since ${oneWeekAgo}`);
+
+    if (!agent.session?.did) {
+      throw new Error('Not authenticated with Bluesky');
+    }
 
     do {
       const response = await agent.getActorLikes({
@@ -102,28 +105,25 @@ const fetchWeeklyLikes = async () => {
   }
 };
 
-const getImageBase64 = (url) => {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (response) => {
-        if (response.statusCode < 200 || response.statusCode > 299) {
-          return reject(new Error(`Failed to load page, status code: ${response.statusCode}`));
-        }
-        const body = [];
-        response.on('data', (chunk) => body.push(chunk));
-        response.on('end', () => {
-          const buffer = Buffer.concat(body);
-          const mimeType = response.headers['content-type'] || 'image/jpeg'; // Default to jpeg if not found
-          resolve(`data:${mimeType};base64,${buffer.toString('base64')}`);
-        });
-      })
-      .on('error', (e) => {
-        reject(e);
-      });
-  });
+const getImageBase64 = async (url: string): Promise<string> => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to load page, status code: ${response.status}`);
+    }
+
+    const arrayBuffer = await response.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
+    const base64 = btoa(String.fromCharCode(...uint8Array));
+    const mimeType = response.headers.get('content-type') || 'image/jpeg';
+
+    return `data:${mimeType};base64,${base64}`;
+  } catch (error) {
+    throw error;
+  }
 };
 
-const formatLikesForEmail = async (likes) => {
+const formatLikesForEmail = async (likes: any[]) => {
   if (likes.length === 0) {
     return {
       html: '<p>No likes found for the past week.</p>',
@@ -138,7 +138,7 @@ const formatLikesForEmail = async (likes) => {
   `;
 
   let text = `Your Bluesky Likes - Past Week\n\nYou liked ${likes.length} posts this week!\n\n`;
-  const attachments = [];
+  const attachments: any[] = [];
 
   for (const [index, like] of likes.entries()) {
     const post = like.post;
@@ -165,9 +165,9 @@ const formatLikesForEmail = async (likes) => {
     text += `Text: ${record.text.replace(/\n/g, '<br/>') || 'No text content'}\n`;
 
     if (post.record.facets) {
-      post.record.facets.forEach((facet) => {
+      post.record.facets.forEach((facet: any) => {
         if (facet.features) {
-          facet.features.forEach((feature) => {
+          facet.features.forEach((feature: any) => {
             if (feature.$type === 'app.bsky.richtext.facet#link' && feature.uri) {
               html += `<p><strong>Link:</strong> <a href="${feature.uri}" target="_blank">${feature.uri}</a></p>`;
               text += `Link: ${feature.uri}\n`;
