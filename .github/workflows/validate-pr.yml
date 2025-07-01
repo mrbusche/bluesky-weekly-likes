@@ -1,4 +1,4 @@
-name: Prettier Fix
+name: Format Check
 
 on:
   pull_request:
@@ -6,26 +6,20 @@ on:
       - main
 
 jobs:
-  prettier:
+  format:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
       with:
-        node-version-file: '.nvmrc'
+        deno-version: v1.x
 
-    - name: Install dependencies
-      run: yarn install --immutable
-
-    - name: Make biome executable
-      run: chmod +x ./node_modules/@biomejs/cli-linux-x64/biome
-
-    - name: Run Prettier
-      run: yarn run prettier:fix
+    - name: Run Deno format
+      run: deno task format
 
     - name: Check for changes
       run: git diff --exit-code
