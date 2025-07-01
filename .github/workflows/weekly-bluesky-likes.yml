@@ -24,14 +24,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
         with:
-          node-version-file: '.nvmrc'
-
-      - name: Install dependencies
-        run: |
-          yarn install --immutable
+          deno-version: v1.x
 
       - name: Fetch and send Bluesky likes
-        run: npm run fetch-likes
+        run: deno task fetch-likes
