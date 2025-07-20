@@ -13,5 +13,6 @@
   ],
   "assignees": ["@mrbusche"],
   "ignoreUnstable": false,
+  "timezone": "America/Chicago",
   "schedule": ["* 0-3 * * 5"]
 }
