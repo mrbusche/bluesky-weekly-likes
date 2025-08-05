@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@atproto/api": "0.16.0",
+    "@atproto/api": "0.16.2",
     "dotenv": "17.2.1",
     "nodemailer": "7.0.5"
   },
