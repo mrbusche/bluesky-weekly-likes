@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@atproto/api@0.16.3":
-  version "0.16.3"
-  resolved "https://registry.yarnpkg.com/@atproto/api/-/api-0.16.3.tgz#89a2c34bc7e1759ca2abbe8eb3867acf9d4bbfc1"
-  integrity sha512-mM9p94oUSjVmhiaurftZp4gppsf1kmW0+N35KFudJqFG3UklxhJeR+z8pwmzrFpyR/+UU/oHdXoLhbGR8PKRQg==
+"@atproto/api@0.16.4":
+  version "0.16.4"
+  resolved "https://registry.yarnpkg.com/@atproto/api/-/api-0.16.4.tgz#952071aca39a731b1664dc3ea4385fa2fb8e4c62"
+  integrity sha512-beAOh0C7uH2F3/BUDUV6lHvxuwRPp+afIneWA9+8iDgkNV2JFuIm769FcjYQ0slXyJ21PxI0IDfOs6Jqtu72Xw==
   dependencies:
     "@atproto/common-web" "^0.4.2"
-    "@atproto/lexicon" "^0.4.13"
+    "@atproto/lexicon" "^0.4.14"
     "@atproto/syntax" "^0.4.0"
-    "@atproto/xrpc" "^0.7.2"
+    "@atproto/xrpc" "^0.7.3"
     await-lock "^2.2.2"
     multiformats "^9.9.0"
     tlds "^1.234.0"
@@ -26,10 +26,10 @@
     uint8arrays "3.0.0"
     zod "^3.23.8"
 
-"@atproto/lexicon@^0.4.13":
-  version "0.4.13"
-  resolved "https://registry.yarnpkg.com/@atproto/lexicon/-/lexicon-0.4.13.tgz#8920409db9efb0c6658524496c9a860442b9e9ff"
-  integrity sha512-GtiNQz/cbGRCK0+uitWewx4tMyLEgQ8gTd118Ncl+gCbgcaFUPggi30NjEQNYg1DmCNUZNdrGsQfE97xNodouw==
+"@atproto/lexicon@^0.4.14":
+  version "0.4.14"
+  resolved "https://registry.yarnpkg.com/@atproto/lexicon/-/lexicon-0.4.14.tgz#a2b5f2bb950d41e78d18f276a01d71b5d89183d8"
+  integrity sha512-jiKpmH1QER3Gvc7JVY5brwrfo+etFoe57tKPQX/SmPwjvUsFnJAow5xLIryuBaJgFAhnTZViXKs41t//pahGHQ==
   dependencies:
     "@atproto/common-web" "^0.4.2"
     "@atproto/syntax" "^0.4.0"
@@ -42,12 +42,12 @@
   resolved "https://registry.yarnpkg.com/@atproto/syntax/-/syntax-0.4.0.tgz#bec71552087bb24c208a06ef418c0040b65542f2"
   integrity sha512-b9y5ceHS8YKOfP3mdKmwAx5yVj9294UN7FG2XzP6V5aKUdFazEYRnR9m5n5ZQFKa3GNvz7de9guZCJ/sUTcOAA==
 
-"@atproto/xrpc@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@atproto/xrpc/-/xrpc-0.7.2.tgz#24c2b94427bb19c6377ce6e825051b82c68bcf17"
-  integrity sha512-cMF4J2EyRpZ3uYN7U5/0tIgRT5hLMlFfkgLzlg8OtQooAzOyC3iAZOsrv9ukexj0Jna/fzavbhlkrWqFSy39Fg==
+"@atproto/xrpc@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@atproto/xrpc/-/xrpc-0.7.3.tgz#e93692326b765426e1e2cca811a668fb7d67303c"
+  integrity sha512-JaJbZ4ymIJzOakR3B/B+6NyppW3oQWn06OtQq03LqVsu93Afpc8VkNtPN3QnhQcD/yYSYCu73lLsDM/ErJEk7Q==
   dependencies:
-    "@atproto/lexicon" "^0.4.13"
+    "@atproto/lexicon" "^0.4.14"
     zod "^3.23.8"
 
 "@biomejs/biome@2.2.2":
