@@ -2,38 +2,28 @@
 # yarn lockfile v1
 
 
-"@atproto/api@0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@atproto/api/-/api-0.19.0.tgz#84ff7a6a32cac70264e2af6754e7f24582c519aa"
-  integrity sha512-7u/EGgkIj4bbslGer2RMQPtMWCPvREcpH0mVagaf5om+NcPzUIZeIacWKANVv95BdMJ7jlcHS7xrkEMPmg2dFw==
+"@atproto/api@0.19.1":
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/@atproto/api/-/api-0.19.1.tgz#62c48595def4c968d94a96f83ed9ee369768de5d"
+  integrity sha512-GE94kx6PBsBAUcFne+cX3c77ZVr3/pvfeeG+GtZ1QFE8U9brrXoCoN6qwtOg6PfZk8UvpyCxLyWNfiC2GfCSJg==
   dependencies:
-    "@atproto/common-web" "^0.4.17"
-    "@atproto/lexicon" "^0.6.1"
-    "@atproto/syntax" "^0.4.3"
+    "@atproto/common-web" "^0.4.18"
+    "@atproto/lexicon" "^0.6.2"
+    "@atproto/syntax" "^0.5.0"
     "@atproto/xrpc" "^0.7.7"
     await-lock "^2.2.2"
     multiformats "^9.9.0"
     tlds "^1.234.0"
     zod "^3.23.8"
 
-"@atproto/common-web@^0.4.13":
-  version "0.4.13"
-  resolved "https://registry.yarnpkg.com/@atproto/common-web/-/common-web-0.4.13.tgz#cccea5e12d65fe8144d4349c454bf98508f93ed8"
-  integrity sha512-TewRUyB/dVJ5PtI3QmJzEgT3wDsvpnLJ+48hPl+LuUueJPamZevXKJN6dFjtbKAMFRnl2bKfdsf79qwvdSaLKQ==
+"@atproto/common-web@^0.4.18":
+  version "0.4.18"
+  resolved "https://registry.yarnpkg.com/@atproto/common-web/-/common-web-0.4.18.tgz#832976340457afd3d29345ad2c6f0ac0bff087dd"
+  integrity sha512-ilImzP+9N/mtse440kN60pGrEzG7wi4xsV13nGeLrS+Zocybc/ISOpKlbZM13o+twPJ+Q7veGLw9CtGg0GAFoQ==
   dependencies:
-    "@atproto/lex-data" "0.0.9"
-    "@atproto/lex-json" "0.0.9"
-    "@atproto/syntax" "0.4.3"
-    zod "^3.23.8"
-
-"@atproto/common-web@^0.4.17":
-  version "0.4.17"
-  resolved "https://registry.yarnpkg.com/@atproto/common-web/-/common-web-0.4.17.tgz#b034df76969da286e8644b4bfee732356a401bcd"
-  integrity sha512-sfxD8NGxyoxhxmM9EUshEFbWcJ3+JHEOZF4Quk6HsCh1UxpHBmLabT/vEsAkDWl+C/8U0ine0+c/gHyE/OZiQQ==
-  dependencies:
-    "@atproto/lex-data" "^0.0.12"
-    "@atproto/lex-json" "^0.0.12"
-    "@atproto/syntax" "^0.4.3"
+    "@atproto/lex-data" "^0.0.13"
+    "@atproto/lex-json" "^0.0.13"
+    "@atproto/syntax" "^0.5.0"
     zod "^3.23.8"
 
 "@atproto/common-web@^0.4.7":
@@ -56,20 +46,10 @@
     uint8arrays "3.0.0"
     unicode-segmenter "^0.14.0"
 
-"@atproto/lex-data@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@atproto/lex-data/-/lex-data-0.0.9.tgz#19bed9399571d8d653a0bfba99b641cb98300e84"
-  integrity sha512-1slwe4sG0cyWtsq16+rBoWIxNDqGPkkvN+PV6JuzA7dgUK9bjUmXBGQU4eZlUPSS43X1Nhmr/9VjgKmEzU9vDw==
-  dependencies:
-    multiformats "^9.9.0"
-    tslib "^2.8.1"
-    uint8arrays "3.0.0"
-    unicode-segmenter "^0.14.0"
-
-"@atproto/lex-data@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@atproto/lex-data/-/lex-data-0.0.12.tgz#2c8778e1a22e9c181de597d09fae88dc0c29b083"
-  integrity sha512-aekJudcK1p6sbTqUv2bJMJBAGZaOJS0mgDclpK3U6VuBREK/au4B6ffunBFWgrDfg0Vwj2JGyEA7E51WZkJcRw==
+"@atproto/lex-data@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@atproto/lex-data/-/lex-data-0.0.13.tgz#db1bcfa12d5056210f6eb7f3b8bac909909d6b9c"
+  integrity sha512-7Z7RwZ1Y/JzBF/Tcn/I4UJ/vIGfh5zn1zjv0KX+flke2JtgFkSE8uh2hOtqgBQMNqE3zdJFM+dcSWln86hR3MQ==
   dependencies:
     multiformats "^9.9.0"
     tslib "^2.8.1"
@@ -84,20 +64,12 @@
     "@atproto/lex-data" "0.0.3"
     tslib "^2.8.1"
 
-"@atproto/lex-json@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@atproto/lex-json/-/lex-json-0.0.9.tgz#4aa3a9067f4c4f38a934143d11b26864d9b125ac"
-  integrity sha512-Q2v1EVZcnd+ndyZj1r2UlGikA7q6It24CFPLbxokcf5Ba4RBupH8IkkQX7mqUDSRWPgQdmZYIdW9wUln+MKDqw==
+"@atproto/lex-json@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@atproto/lex-json/-/lex-json-0.0.13.tgz#b0081f786aeeb1707087318fb03c928e75c19059"
+  integrity sha512-hwLhkKaIHulGJpt0EfXAEWdrxqM2L1tV/tvilzhMp3QxPqYgXchFnrfVmLsyFDx6P6qkH1GsX/XC2V36U0UlPQ==
   dependencies:
-    "@atproto/lex-data" "0.0.9"
-    tslib "^2.8.1"
-
-"@atproto/lex-json@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@atproto/lex-json/-/lex-json-0.0.12.tgz#14e1eb494ac4590c79ea26e70c3a3033821fc285"
-  integrity sha512-XlEpnWWZdDJ5BIgG25GyH+6iBfyrFL18BI5JSE6rUfMObbFMrQRaCuRLQfryRXNysVz3L3U+Qb9y8KcXbE8AcA==
-  dependencies:
-    "@atproto/lex-data" "^0.0.12"
+    "@atproto/lex-data" "^0.0.13"
     tslib "^2.8.1"
 
 "@atproto/lexicon@^0.6.0":
@@ -111,13 +83,13 @@
     multiformats "^9.9.0"
     zod "^3.23.8"
 
-"@atproto/lexicon@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@atproto/lexicon/-/lexicon-0.6.1.tgz#cdde25248083b39cc903cb845f632abfd64ef51a"
-  integrity sha512-/vI1kVlY50Si+5MXpvOucelnYwb0UJ6Qto5mCp+7Q5C+Jtp+SoSykAPVvjVtTnQUH2vrKOFOwpb3C375vSKzXw==
+"@atproto/lexicon@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@atproto/lexicon/-/lexicon-0.6.2.tgz#f6152a2119df953236ca127c4b30e332265e81e7"
+  integrity sha512-p3Ly6hinVZW0ETuAXZMeUGwuMm3g8HvQMQ41yyEE6AL0hAkfeKFaZKos6BdBrr6CjkpbrDZqE8M+5+QOceysMw==
   dependencies:
-    "@atproto/common-web" "^0.4.13"
-    "@atproto/syntax" "^0.4.3"
+    "@atproto/common-web" "^0.4.18"
+    "@atproto/syntax" "^0.5.0"
     iso-datestring-validator "^2.2.2"
     multiformats "^9.9.0"
     zod "^3.23.8"
@@ -127,10 +99,10 @@
   resolved "https://registry.yarnpkg.com/@atproto/syntax/-/syntax-0.4.2.tgz#a83ff62b82bf84308d78ad836c802bad6a52174a"
   integrity sha512-X9XSRPinBy/0VQ677j8VXlBsYSsUXaiqxWVpGGxJYsAhugdQRb0jqaVKJFtm6RskeNkV6y9xclSUi9UYG/COrA==
 
-"@atproto/syntax@0.4.3", "@atproto/syntax@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@atproto/syntax/-/syntax-0.4.3.tgz#3889469daa5458a3c8e27a2cb16016e89cfafaf9"
-  integrity sha512-YoZUz40YAJr5nPwvCDWgodEOlt5IftZqPJvA0JDWjuZKD8yXddTwSzXSaKQAzGOpuM+/A3uXRtPzJJqlScc+iA==
+"@atproto/syntax@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@atproto/syntax/-/syntax-0.5.0.tgz#061ef538aee784f8e5fa1ea50a7f5beb4c276c9b"
+  integrity sha512-UA2DSpGdOQzUQ4gi5SH+NEJz/YR3a3Fg3y2oh+xETDSiTRmA4VhHRCojhXAVsBxUT6EnItw190C/KN+DWW90kw==
   dependencies:
     tslib "^2.8.1"
 
