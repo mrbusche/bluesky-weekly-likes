@@ -16,5 +16,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.6"
-  }
+  },
+  "packageManager": "yarn@4.13.0"
 }
