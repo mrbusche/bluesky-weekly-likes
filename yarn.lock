@@ -5,19 +5,19 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@atproto/api@npm:0.19.3":
-  version: 0.19.3
-  resolution: "@atproto/api@npm:0.19.3"
+"@atproto/api@npm:0.19.4":
+  version: 0.19.4
+  resolution: "@atproto/api@npm:0.19.4"
   dependencies:
     "@atproto/common-web": "npm:^0.4.18"
     "@atproto/lexicon": "npm:^0.6.2"
-    "@atproto/syntax": "npm:^0.5.0"
+    "@atproto/syntax": "npm:^0.5.1"
     "@atproto/xrpc": "npm:^0.7.7"
     await-lock: "npm:^2.2.2"
     multiformats: "npm:^9.9.0"
     tlds: "npm:^1.234.0"
     zod: "npm:^3.23.8"
-  checksum: 10c0/f749f4033f749f84de50ec7f3330730ba8a96323d5b1646cab22540e2acb0ecea9017a4bda57acd9e82d1a84c34f68f4f214a97be696f773aa75284fd8df2691
+  checksum: 10c0/3c6671faeecb5945fc0a876866045a7a98aa7a2fd1734bfcbc13e2f58a501fb2642986b4d58d5449072ab5bd7a6f01c5c40b83c64f3912b8ac276283730c6416
   languageName: node
   linkType: hard
 
@@ -128,6 +128,15 @@ __metadata:
   dependencies:
     tslib: "npm:^2.8.1"
   checksum: 10c0/20c0d5da374a599647c7c9f79e7bb498cea91504a059dd1b2e4dfd22aa49234860a5449eba0724ecff1039ce4ab10a0fcb39d5adff49396fff1a34999ba0b040
+  languageName: node
+  linkType: hard
+
+"@atproto/syntax@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@atproto/syntax@npm:0.5.1"
+  dependencies:
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/4ae7e49374468ceb3bee3ce81da9461e6d8325c65c9a1bfbbf4df04abd45681bfc7c04a30fd804089fffd731624f6cb0e3372cbb980f90f3e6b67dd5bff2b934
   languageName: node
   linkType: hard
 
@@ -243,7 +252,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "bluesky-weekly-likes@workspace:."
   dependencies:
-    "@atproto/api": "npm:0.19.3"
+    "@atproto/api": "npm:0.19.4"
     "@biomejs/biome": "npm:2.4.7"
     dotenv: "npm:17.3.1"
     nodemailer: "npm:8.0.2"
