@@ -9,17 +9,21 @@ For accessibility purposes there is an HTML and text version of the generated em
 ### 1. Fork this repository to your GitHub account
 
 ### 2. Set up Bluesky credentials
+
 - You'll need your Bluesky username/handle and password
 - Note: You will want to create an app-specific password for Bluesky
 
 ### 3. Set up email credentials
+
 For Gmail (recommended):
+
 - Generate an app-specific password:
   1. Go to Google Account settings
   2. Security → 2-Step Verification → App passwords
   3. Generate a new app password for this script
 
 ### 4. Configure GitHub Secrets
+
 Go to your forked repository → Settings → Secrets and variables → Actions
 
 Add these repository secrets:
@@ -31,6 +35,7 @@ Add these repository secrets:
 - `BLUESKY_PASSWORD`: Your Bluesky password from step 2
 
 ### 5. Test the workflow
+
 - Go to Actions → Weekly Bluesky Likes Email
 - Click "Run workflow" to test it manually
 - Check your email for the weekly digest
@@ -46,6 +51,7 @@ Add these repository secrets:
 ## Privacy
 
 This script:
+
 - Only accesses your own Bluesky likes
 - Runs on GitHub's servers
 - Only sends emails to addresses you specify
