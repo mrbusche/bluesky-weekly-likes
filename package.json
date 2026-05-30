@@ -11,13 +11,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@atproto/api": "0.20.4",
+    "@atproto/api": "0.20.7",
     "dotenv": "17.4.2",
-    "nodemailer": "8.0.7"
+    "nodemailer": "8.0.10"
   },
   "devDependencies": {
-    "oxfmt": "0.51.0",
-    "oxlint": "1.66.0"
+    "oxfmt": "0.52.0",
+    "oxlint": "1.67.0"
   },
   "packageManager": "yarn@4.15.0"
 }
